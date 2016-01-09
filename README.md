@@ -12,13 +12,13 @@ The module is currently only able to read the serial number of the tag which is 
 
 ## Installation
 
-1. Install node:
+## 1. Install node:
 ```
 curl -sL https://deb.nodesource.com/setup_0.12 | sudo bash -
 sudo apt-get install -y nodejs
 ```
 
-2. Update your PI:
+## 2. Update your PI:
 ``` 
 sudo apt-get update
 sudo apt-get upgrade
@@ -27,13 +27,13 @@ sudo rpi-update
 sudo apt-get clean
 ```
 
-3. Configure the PI:
+## 3. Configure the PI:
 
 The RFID reader is plugged onto the raspberry pi like it is described over here http://geraintw.blogspot.de/2014/01/rfid-and-raspberry-pi.html
 - The GCC compiler is installed ```sudo apt-get install build-essential```
 - node-gyp is installed ```sudo npm install -g node-gyp```
 
-4. Compile the spi_bcm2835 driver:
+## 4. Compile the spi_bcm2835 driver:
 First of all we have to install the C library for Broadcom BCM 2835 as it describe` here
 ```
 wget http://www.airspayce.com/mikem/bcm2835/bcm2835-1.49.tar.gz
@@ -46,7 +46,7 @@ sudo make install
 sudo modprobe spi_bcm2835
 ```
 
-5. Make a node project
+## 5. Make a node project
 ```
 cd ~/
 mkdir RFID
@@ -65,4 +65,10 @@ console.log('Ready!!!');
 rc522(function(rfidSerialNumber){
 	console.log(rfidSerialNumber);
 });
+```
+
+Save and run: (Is necessary "sudo")
+
+```
+sudo node rfid.js
 ```
