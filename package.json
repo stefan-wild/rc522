@@ -1,7 +1,7 @@
 {
   "author": {
-    "name": "Sascha Brinkmann",
-    "email": "sascha.brinkmann@gmail.com"
+    "name": "Ovídio César",
+    "email": "ocsacesar@gmail.com"
   },
   "name": "rc522",
   "description": "node.js module to access a rfid reader with rc522 chipset which is connected a raspberry pi",
@@ -9,7 +9,7 @@
     "rfid",
     "rc522"
   ],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "https://github.com/ocsacesar/rc522.git"
