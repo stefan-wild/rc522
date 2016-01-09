@@ -58,7 +58,7 @@ nano rfid.js
 Put this into:
 
 ```
-var rc522 = require("rc522");
+var rc522 = require("rc522/build/Release/rc522");
 
 console.log('Ready!!!');
 
