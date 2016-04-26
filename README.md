@@ -58,7 +58,7 @@ nano rfid.js
 Put this into:
 
 ```
-var rc522 = require("rc522/build/Release/rc522");
+var rc522 = require("rc522");
 
 console.log('Ready!!!');
 
@@ -72,3 +72,12 @@ Save and run: (Is necessary "sudo")
 ```
 sudo node rfid.js
 ```
+
+
+NOTE: Running as root
+
+```Prior to the release of Raspbian Jessie in Feb 2016, access to any peripheral device via /dev/mem on the RPi required the process to run as root. Raspbian Jessie permits non-root users to access the GPIO peripheral (only) via /dev/gpiomem, and this library supports that limited mode of operation.
+
+If the library runs with effective UID of 0 (ie root), then bcm2835_init() will attempt to open /dev/mem, and, if successful, it will permit use of all peripherals and library functions.
+
+If the library runs with any other effective UID (ie not root), then bcm2835_init() will attempt to open /dev/gpiomem, and, if successful, will only permit GPIO operations. In particular, bcm2835_spi_begin() and bcm2835_i2c_begin() will return false and all other non-gpio operations may fail silently or crash.```
