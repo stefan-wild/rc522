@@ -42,6 +42,14 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                 noTagFoundCount = 0;
             } else {
                 noTagFoundCount++;
+
+                if (noTagFoundCount == 4) {
+                    Local<Value> argv[argc] = {
+                        String::NewFromUtf8(isolate, 'd')
+                    };
+
+                    callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+                }
             }
 
             usleep(200000);
