@@ -41,16 +41,15 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                 // Sets the content of the array 'rfidChipSerialNumberRecentlyDetected' back to zero
                 memset(&rfidChipSerialNumberRecentlyDetected[0], 0, sizeof (rfidChipSerialNumberRecentlyDetected));
                 noTagFoundCount = 0;
+
+                // send disconnected event
+                Local<Value> argv[argc] = {
+                    String::NewFromUtf8(isolate, &noTag[0])
+                };
+
+                callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
             } else {
                 noTagFoundCount++;
-
-                if (noTagFoundCount == 4) {
-                    Local<Value> argv[argc] = {
-                        String::NewFromUtf8(isolate, &noTag[0])
-                    };
-
-                    callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
-                }
             }
 
             usleep(200000);
