@@ -16,6 +16,7 @@ uint8_t serialNumberLength = 0;
 uint8_t noTagFoundCount = 0;
 char rfidChipSerialNumber[23];
 char rfidChipSerialNumberRecentlyDetected[23];
+char noTag[13] = "disconnected";
 char *p;
 int loopCounter;
 
@@ -45,7 +46,7 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
 
                 if (noTagFoundCount == 4) {
                     Local<Value> argv[argc] = {
-                        String::NewFromUtf8(isolate, 'd')
+                        String::NewFromUtf8(isolate, &noTag[0])
                     };
 
                     callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
