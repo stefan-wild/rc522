@@ -19,6 +19,7 @@ char rfidChipSerialNumberRecentlyDetected[23];
 char noTag[13] = "disconnected";
 char *p;
 int loopCounter;
+bool sendDisconnect = false;
 
 using namespace v8;
 
@@ -43,11 +44,15 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
                 noTagFoundCount = 0;
 
                 // send disconnected event
-                Local<Value> argv[argc] = {
-                    String::NewFromUtf8(isolate, &noTag[0])
-                };
+                if (sendDisconnect) {
+                    Local<Value> argv[argc] = {
+                        String::NewFromUtf8(isolate, &noTag[0])
+                    };
 
-                callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+                    callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+
+                    sendDisconnect = false;
+                }
             } else {
                 noTagFoundCount++;
             }
@@ -79,6 +84,8 @@ void RunCallback(const FunctionCallbackInfo<Value>& args) {
             };
 
             callback->Call(isolate->GetCurrentContext()->Global(), argc, argv);
+
+            sendDisconnect = true;
         }
 
         // Preserves the current detected serial number, so that it can be used
